@@ -8,6 +8,7 @@ const AggregateError = require('aggregate-error');
  * @param {string|Array} pluginConfig.regExps regular expressions to filter invalid dependencies
  * @param {Object} pluginConfig.dependencies dependencies from package.json to check
  * @param {Object} pluginConfig.devDependencies devDependencies from package.json to check
+ * @param {string} pluginConfig.pkgPath path to package.json
  *
  */
 
@@ -38,7 +39,6 @@ function verifyConditions(pluginConfig) {
 		});
 		if (errors.length > 0) {
 			return Promise.reject(new AggregateError(errors));
-			
 		}
 		return Promise.resolve();
 	});
