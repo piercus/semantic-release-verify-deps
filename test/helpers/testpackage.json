@@ -1,0 +1,91 @@
+{
+    "name": "test-package",
+    "version": "0.9.0",
+    "description": "",
+    "main": "index.js",
+    "files": [
+      "index.js",
+      "lib",
+      "bin"
+    ],
+    "bin": {
+      "ffmpeg_json_to_bash": "./bin/ffmpeg_json_to_bash.js",
+      "ffmpeg_json": "./bin/ffmpeg_json.js"
+    },
+    "author": "Pierre Colle (Klap)",
+    "private": true,
+    "license": "UNLICENSED",
+    "devDependencies": {
+      "@semantic-release/git": "^2.2.0",
+      "@semantic-release/github": "^3.0.3",
+      "@semantic-release/npm": "^2.7.0",
+      "async": "^2.1.2",
+      "aws-sdk": "^2.7.8",
+      "bluebird": "*",
+      "brissot-grunt": "git@github.com:teamklap/lib-node-brissot-grunt.git#1.0.x",
+      "brissot-logger": "git@github.com:teamklap/lib-node-brissot-logger.git#1.0.x",
+      "build-basic-error": "^1.0.0",
+      "dynamoose": "^0.7.0",
+      "engine": "git@github.com:teamklap/lib-node-engine.git#0.4.x",
+      "grunt": "^1.0.1",
+      "grunt-bump": "^0.8.0",
+      "grunt-contrib-symlink": "^1.0.0",
+      "grunt-git": "^1.0.1",
+      "grunt-requirejs-vows": "0.0.11",
+      "grunt-vows": "^0.4.2",
+      "moods": "git@github.com:teamklap/lib-node-moods.git#0.2.x",
+      "recursive-readdir": "^2.1.0",
+      "requirejs": "^2.3.2",
+      "rush-analyzer": "git@github.com:teamklap/lib-node-RushAnalyzer.git#0.0.x",
+      "seed-js": "0.0.8",
+      "semantic-release": "^12.4.1",
+      "semantic-release-no-untagged-github-deps": "file:local-packages/semantic-release-no-untagged-github-deps",
+      "vows": "^0.8.1",
+      "xo": "^0.18.2"
+    },
+    "dependencies": {
+      "fluent-ffmpeg": "^2.1.0",
+      "winston": "^2.2.0"
+    },
+    "scripts": {
+      "test": "xo && vows test/promise.js",
+      "semantic-release": "semantic-release"
+    },
+    "xo": {
+      "rules": {
+        "unicorn/filename-case": 0,
+        "max-params": 0
+      },
+      "ignores": [
+        "config/**",
+        "test/jsons.js",
+        "test/basic.js"
+      ]
+    },
+    "repository": {
+      "type": "git",
+      "url": "git@github.com:teamklap/lib-node-FfmpegEngine.git"
+    },
+    "release": {
+      "branch": "tania/verify-conditions-plugin",
+      "verifyConditions": [
+        "@semantic-release/git",
+        "@semantic-release/github",
+        {
+          "path": "semantic-release-no-untagged-github-deps",
+          "dependencies": true,
+          "devDependencies": true,
+          "regExps": ["\\d$"]
+        }
+      ],
+      "getLastRelease": "@semantic-release/git",
+      "publish": [
+        {
+          "path": "@semantic-release/npm",
+          "npmPublish": false
+        },
+        "@semantic-release/git",
+        "@semantic-release/github"
+      ]
+    }
+  } 
