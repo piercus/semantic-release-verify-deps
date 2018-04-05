@@ -1,9 +1,15 @@
 language: node_js
 node_js:
   - 6
-  
+
 script:
   - npm run test	
+
+before_deploy: npm install -g npx
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: npx -p node@8 -c "npm run semantic-release"
 
 branches:	
   only:	
