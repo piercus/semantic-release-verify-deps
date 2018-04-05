@@ -9,7 +9,7 @@ test('check that normal dependencies are working', t => {
 		regExps: []
 	});
     console.log(res);
-	t.is(res, "pending");
+	t.is(res, 'fulfilled');
 });
 
 /*

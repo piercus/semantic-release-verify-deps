@@ -13,7 +13,9 @@ const AggregateError = require('aggregate-error');
  */
 
 function verifyConditions(pluginConfig) {
+	console.log('started');
 	return readPkg(pluginConfig.pkgPath).then(pkg => {
+		console.log('got pkg');
 		const dependenciesToCheck = {};
 
 		if (pluginConfig.dependencies) {
