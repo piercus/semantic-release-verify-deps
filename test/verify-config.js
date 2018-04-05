@@ -3,13 +3,13 @@ const plugin = require('..');
 
 test('check that normal dependencies are working', t => {
 	const res = plugin.verifyConditions({
-		pkgPath: './test/helpers/testpackage.json',
-		devDependencies: false,
+		pkgPath: './test/helpers/passingpackage.json',
+		devDependencies: true,
 		dependencies: true,
 		regExps: []
 	});
-     console.log(res);
-	// T.is(res);
+    console.log(res);
+	t.is(res, "pending");
 });
 
 /*
