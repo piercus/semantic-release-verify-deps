@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ava test/*.js"
+    "test": "ava test/*.js",
+    "semantic-release":"semantic-release"
   },
   "author": "",
   "license": "ISC",
@@ -13,8 +14,27 @@
     "read-pkg": "^3.0.0"
   },
   "devDependencies": {
+    "@semantic-release/git": "^2.2.0",
+    "@semantic-release/github": "^3.0.3",
+    "@semantic-release/npm": "^2.7.0",
     "ava": "^0.25.0",
+    "semantic-release": "^12.4.1",
     "sinon": "^4.5.0",
     "xo": "^0.20.3"
+  },
+  "release": {
+    "verifyConditions": [
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ],
+    "getLastRelease": "@semantic-release/git",
+    "publish": [
+      {
+        "path": "@semantic-release/npm",
+        "npmPublish": false
+      },
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ]
   }
 }
