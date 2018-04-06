@@ -1,14 +1,21 @@
 {
-  "name": "semantic-release-no-untagged-github-deps",
+  "name": "semantic-release-verify-deps",
   "version": "1.0.0",
-  "description": "",
+  "description": "verify dependencies plugin for semantic-release",
   "main": "index.js",
   "scripts": {
     "test": "xo && ava test/*.js",
     "semantic-release":"semantic-release"
   },
-  "author": "",
+  "author": "Pierre Colle <piercus@gmail.com>",
+  "contributors": [
+    "Tania Pashniuk <t.pashnyuk@gmail.com>"
+  ],
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piercus/semantic-release-verify-deps/issues"
+  },
+  "homepage": "https://github.com/piercus/semantic-release-verify-deps#semantic-release-verify-deps",
   "dependencies": {
     "aggregate-error": "^1.0.0",
     "read-pkg": "^3.0.0"
@@ -19,7 +26,6 @@
     "@semantic-release/npm": "^2.7.0",
     "ava": "^0.25.0",
     "semantic-release": "^12.4.1",
-    "sinon": "^4.5.0",
     "xo": "^0.20.3"
   },
   "xo": {
