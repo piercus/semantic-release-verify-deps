@@ -1,23 +1,24 @@
 const test = require('ava');
 const plugin = require('..');
 
-test('check that normal dependencies are working', t => { // Xo: Prefer using async/await instead of returning a Promise
-	return plugin.verifyConditions({ // Xo: Unknown assertion method bind
-		pkgPath: './test/helpers/passingpackage.json',
-		devDependencies: true,
-		dependencies: true,
-		regExps: []
-	}).then(t.pass.bind(t));
-});
-
-
-test.failing('rejects', t => {
-    const error = t.throws(
-    plugin.verifyConditions({
-        pkgPath: './test/helpers/failingpackage.json',
+test('check that normal dependencies are working', t => {
+    return plugin.verifyConditions({
+        pkgPath: './test/helpers/passingpackage.json',
         devDependencies: true,
         dependencies: true,
-        regExps: ["[a-zA-Z]+$"]
-    })).then(err => {console.log ("err:", err);}); 
-    t.fail();
+        regExps: []
+    }).then(t.pass(t));
+});
+
+test('check that invalid dependencies are working #1', async t => {
+    const error = await t.throws(plugin.verifyConditions(
+        { pkgPath: './test/helpers/failingpackage.json', devDependencies: true, dependencies: true, regExps: ['[a-zA-Z]+$'] }
+    ));
+    t.truthy(error.message); //.fail([message]).pass([message])
+});
+
+test.failing('check that invalid dependencies are working #2', t => {
+    t.throws(plugin.verifyConditions(
+        { pkgPath: './test/helpers/failingpackage.json', devDependencies: true, dependencies: true, regExps: ['[a-zA-Z]+$'] }
+    )).then(err => {t.truthy(err.message); });
 });
