@@ -22,6 +22,11 @@
     "sinon": "^4.5.0",
     "xo": "^0.20.3"
   },
+  "xo": {
+    "rules" : {
+      "ava/prefer-async-await":0
+      }
+    },
   "release": {
     "verifyConditions": [
       "@semantic-release/git",
