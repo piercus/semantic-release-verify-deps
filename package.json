@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "xo && ava test/*.js",
-    "semantic-release":"semantic-release"
+    "semantic-release": "semantic-release"
   },
   "author": "Pierre Colle <piercus@gmail.com>",
   "contributors": [
@@ -29,10 +29,10 @@
     "xo": "^0.20.3"
   },
   "xo": {
-    "rules" : {
-      "ava/prefer-async-await":0
-      }
-    },
+    "rules": {
+      "ava/prefer-async-await": 0
+    }
+  },
   "release": {
     "verifyConditions": [
       "@semantic-release/git",
