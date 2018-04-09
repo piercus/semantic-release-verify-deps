@@ -4,6 +4,8 @@ node_js:
 
 script:
   - npm run test	
+after_success:
+  - npm run coverage
 
 before_deploy: npm install -g npx
 deploy:
@@ -15,3 +17,4 @@ branches:
   only:	
   - develop
   - master
+  - tania/add-codecov
