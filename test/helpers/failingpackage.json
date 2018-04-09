@@ -1,0 +1,20 @@
+{
+    "devDependencies": {
+      "@semantic-release/git": "^2.2.x",
+      "@semantic-release/github": "^3.0.3",
+      "grunt-bump": "^0.8.0",
+      "grunt-contrib-symlink": "^1.0.0",
+      "grunt-git": "^1.0.1",
+      "grunt-requirejs-vows": "0.0.11",
+      "grunt-vows": "^0.4.2",
+      "recursive-readdir": "^2.1.0",
+      "requirejs": "^2.3.2",
+      "seed-js": "0.0.8",
+      "vows": "^0.8.1",
+      "xo": "^0.18.2"
+    },
+    "dependencies": {
+      "fluent-ffmpeg": "^2.1.x",
+      "winston": "^2.2.0"
+    }
+  } 

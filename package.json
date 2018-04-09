@@ -1,0 +1,51 @@
+{
+  "name": "semantic-release-verify-deps",
+  "version": "1.0.0",
+  "description": "verify dependencies plugin for semantic-release",
+  "main": "index.js",
+  "scripts": {
+    "test": "xo && ava test/*.js",
+    "semantic-release":"semantic-release"
+  },
+  "author": "Pierre Colle <piercus@gmail.com>",
+  "contributors": [
+    "Tania Pashniuk <t.pashnyuk@gmail.com>"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piercus/semantic-release-verify-deps/issues"
+  },
+  "homepage": "https://github.com/piercus/semantic-release-verify-deps#semantic-release-verify-deps",
+  "dependencies": {
+    "aggregate-error": "^1.0.0",
+    "read-pkg": "^3.0.0"
+  },
+  "devDependencies": {
+    "@semantic-release/git": "^2.2.0",
+    "@semantic-release/github": "^3.0.3",
+    "@semantic-release/npm": "^2.7.0",
+    "ava": "^0.25.0",
+    "semantic-release": "^12.4.1",
+    "xo": "^0.20.3"
+  },
+  "xo": {
+    "rules" : {
+      "ava/prefer-async-await":0
+      }
+    },
+  "release": {
+    "verifyConditions": [
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ],
+    "getLastRelease": "@semantic-release/git",
+    "publish": [
+      {
+        "path": "@semantic-release/npm",
+        "npmPublish": false
+      },
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ]
+  }
+}
