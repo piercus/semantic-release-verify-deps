@@ -1,122 +1,58 @@
 # Semantic-release-verify-deps
-Verify the format of dependencies before releasing with [semantic-release](https://github.com/semantic-release/semantic-release).
+
+[semantic-release](https://github.com/semantic-release/semantic-release) plugin to validate the format of dependencies before releasing.
+
+## Why create this plugin
+
+In the typical [gitflow](nvie.com/posts/a-successful-git-branching-model/) process, we release tags on master branch and we implement on develop branch.
+
+When doing implementation we sometimes need to change deps to 'floating' deps like :
+* [git](https://docs.npmjs.com/files/package.json#git-urls-as-dependencies) private deps
+* [local path](https://docs.npmjs.com/files/package.json#local-paths) deps.
+
+Even if this is useful on `dev` branch, it is a bad idea to release on master branch a version with floating dependencies.
+
+Current plugin lets you define a validation/regular expression pattern to avoid this kind of mistake.
+
+## Installation
+
+```js
+npm install --save-dev semantic-release-verify-deps 
+```
 
 ## Usage
-Plugin can be set within the plugin definition in the Semantic-release configuration file on Verify Conditions step in the project's `package.json` file.
 
-For example:
+Plugin must be set within the plugin definition in the Semantic-release configuration file on Verify Conditions step in the project's `package.json` file.
+
+For example, you can force each dependency to finish with a digit in package.json by doing :
 
 ```
 "release": {
     "verifyConditions": [
-      "@semantic-release/git",
-      "@semantic-release/github",
       {
         "path": "semantic-release-verify-deps",
         "dependencies": true,
         "devDependencies": false,
-        "regExps": [
-          "\\D$", "\\d$"
-        ]
-      }
-    ]
-```
-## Configuration
-
-**Parameters:**
-
-|Parameter|Description|Type|
-|---------|-----------|----|
-|dependencies|dependencies that are specified in `package.json` file| boolean|
-|devDependencies|dependencies that are specified in `package.json` file| boolean|
-|regExps|[regular expresions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) that will be used as pattern in [RegExp Constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) to match invalid dependencies in `package.json` file | array of patterns|
-
-## Usage examples
-
-**Configuration:**
-```
-"release": {
-    "verifyConditions": [
-      "@semantic-release/git",
-      "@semantic-release/github",
-      {
-        "path": "semantic-release-verify-deps",
-        "dependencies": true,
-        "devDependencies": true,
         "regExps": [
           "\\D$"
         ]
       }
     ]
 ```
-### Success:
-All dependencies were validated with RegExp. No matches were found. 
-**Sample of dependencies:**
-```
-{
-    "devDependencies": {
-      "@semantic-release/git": "^2.2.1"
-    },
-    "dependencies": {
-      "winston": "^2.2.0"
-    }
-  } 
-```
-**Output:**
-```
-[Semantic release]: Load plugin verifyConditions from @semantic-release/git
-[Semantic release]: Load plugin verifyConditions from @semantic-release/github
-[Semantic release]: Load plugin verifyConditions from semantic-release-verify-deps
-[Semantic release]: Load plugin getLastRelease from @semantic-release/git
-[Semantic release]: Run automated release from branch master
-[Semantic release]: Call plugin verify-conditions
-[Semantic release]: Verify authentication for repository git+ssh://git@github.com/teamklap/lib-node-FfmpegEngine.git
-[Semantic release]: Verify GitHub authentication
-[Semantic release]: Call plugin get-last-release
-.........
-```
 
-### Fail:
-All dependencies were validated with RegExps. One or more matches were found. Semantic-release Verify Cnditions step failed  with an *error*
 
-**Sample of dependencies:**
-```
-{
-    "devDependencies": {
-      "@semantic-release/git": "^2.2.1",
-      "grunt-bump": "^0.8.x"
-    },
-    "dependencies": {
-      "fluent-ffmpeg": "^2.1.x",
-      "winston": "^2.2.0"
-    }
-  } 
-```
+## Configuration
 
-**Output:**
-```
-[Semantic release]: Load plugin verifyConditions from @semantic-release/git
-[Semantic release]: Load plugin verifyConditions from @semantic-release/github
-[Semantic release]: Load plugin verifyConditions from semantic-release-no-untagged-github-deps
-[Semantic release]: Call plugin verify-conditions
-[Semantic release]: Verify authentication for repository git+ssh://git@github.com/teamklap/sample.git
-[Semantic release]: Verify GitHub authentication
-[Semantic release]: An error occurred while running semantic-release: {
-AggregateError:
-    Error: invalid dependency in : fluent-ffmpeg: ^2.1.x
-        at regexps.forEach.exp (/home/user/Documents/semantic-release-verify-deps/index.js:35:19)
-        at Array.forEach (<anonymous>)
-        at readPkg.then.pkg (/home/user/Documents/semantic-release-verify-deps/index.js:29:11)
-        at <anonymous>
-    Error: invalid dependency in : grunt-bump: ^0.8.x
-        at regexps.forEach.exp (/home/user/Documents/semantic-release-verify-deps/index.js:35:19)
-        at Array.forEach (<anonymous>)
-        at readPkg.then.pkg (/home/user/Documents/semantic-release-verify-deps/index.js:29:11)
-        at <anonymous>
-    at readPkg.then.pkg (/home/user/Documents/semantic-release-verify-deps/index.js:41:26)
-    at <anonymous> name: 'AggregateError'
-}
-npm ERR! code ELIFECYCLE
-npm ERR! errno 1
-npm ERR! Exit status 1
-```
+**Parameters:**
+
+|Parameter|Description|Type|Default|
+|---------|-----------|----|---|
+|dependencies|dependencies that are specified in `package.json` file| boolean| true|
+|devDependencies|dependencies that are specified in `package.json` file| boolean| false|
+|regExps|[regular expresions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) that will be used as pattern in [RegExp Constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) to match **invalid dependencies** in `package.json` file | array of patterns| [] |
+
+## Regexps examples
+
+`"\\D$"` : Each dependency ending without a digit is invalid for release
+`"\\d$"` : Each dependency ending with a digit is invalid for release
+`".*github.*"` : Each github dependency is invalid for release
