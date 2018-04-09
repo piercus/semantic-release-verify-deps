@@ -54,5 +54,7 @@ For example, you can force each dependency to finish with a digit in package.jso
 ## Regexps examples
 
 `"\\D$"` : Each dependency ending without a digit is invalid for release
+
 `"\\d$"` : Each dependency ending with a digit is invalid for release
+
 `".*github.*"` : Each github dependency is invalid for release
