@@ -2,7 +2,7 @@
 
 [semantic-release](https://github.com/semantic-release/semantic-release) plugin to validate the format of dependencies before releasing.
 
-## Why ?
+## Why create this plugin
 
 In the typical [gitflow](nvie.com/posts/a-successful-git-branching-model/) process, we release tags on master branch and we implement on develop branch.
 

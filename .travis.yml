@@ -3,7 +3,8 @@ node_js:
   - 6
 
 script:
-  - npm run test	
+  - npm run test
+  - npm run coverage
 
 before_deploy: npm install -g npx
 deploy:

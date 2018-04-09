@@ -4,7 +4,8 @@
   "description": "verify dependencies plugin for semantic-release",
   "main": "index.js",
   "scripts": {
-    "test": "xo && ava test/*.js",
+    "test": "xo && nyc ava",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "semantic-release": "semantic-release"
   },
   "author": "Pierre Colle <piercus@gmail.com>",
@@ -25,6 +26,8 @@
     "@semantic-release/github": "^3.0.3",
     "@semantic-release/npm": "^2.7.0",
     "ava": "^0.25.0",
+    "codecov": "^3.0.0",
+    "nyc": "^11.6.0",
     "semantic-release": "^12.4.1",
     "xo": "^0.20.3"
   },
