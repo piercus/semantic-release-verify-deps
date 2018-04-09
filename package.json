@@ -1,6 +1,6 @@
 {
   "name": "semantic-release-verify-deps",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "verify dependencies plugin for semantic-release",
   "main": "index.js",
   "scripts": {
